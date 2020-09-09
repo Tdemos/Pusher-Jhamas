@@ -22,7 +22,30 @@ services:
         MYSQL_ROOT_PASSWORD: root 
       networks:
         - app-network
+
+    messenger-app:
+      build:
+        context: node
+        dockerfile: Dockerfile
+      command: ["npm", "start"]  
+      ports:
+        - "8890:8890"
+      volumes:
+        - .:/var/www
+      networks:
+        - app-network
+      
+    redis-app:
+      image: bitnami/redis:latest
+      volumes:
+        - .docker/redis-data:/data
+      command: ["redis-server", "--appendonly", "yes"]  
+      ports:
+        - "6379:6379"
+      networks:
+        - app-network
+  
 networks:
   app-network:
     driver: bridge
-    
+  
