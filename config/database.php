@@ -117,7 +117,7 @@ return [
     |
     */
 
-    'redis' => [
+    /*  'redis' => [
 
         'client' => env('REDIS_CLIENT', 'predis'),
 
@@ -142,6 +142,18 @@ return [
             'database' => env('REDIS_CACHE_DB', 1),
         ],
 
-    ],
+    ], */
 
+    'redis' => [
+
+        'cluster' => true,
+
+        'default' => [
+            'host' => env('REDIS_HOST', 'localhost'),
+            'password' => env('REDIS_PASSWORD', null),
+            'port' => env('REDIS_PORT', 6379),
+            'database' => 0,
+        ],
+
+    ],
 ];

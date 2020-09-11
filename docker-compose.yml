@@ -25,13 +25,10 @@ services:
 
     messenger-app:
       build:
-        context: node
+        context: app/node
         dockerfile: Dockerfile
-      command: ["npm", "start"]  
       ports:
         - "8890:8890"
-      volumes:
-        - .:/var/www
       networks:
         - app-network
       
@@ -39,7 +36,7 @@ services:
       image: bitnami/redis:latest
       volumes:
         - .docker/redis-data:/data
-      command: ["redis-server", "--appendonly", "yes"]  
+      command: redis-server --requirepass Redis2020!  
       ports:
         - "6379:6379"
       networks:
